@@ -25,17 +25,19 @@ class Fly {
 
   void setTargetLocation() {
     double x = game.rnd.nextDouble() *
-        (game.screenSize.width - (game.tileSize * 2.025));
-    double y = game.rnd.nextDouble() *
-        (game.screenSize.height - (game.tileSize * 2.025));
+        (game.screenSize.width - (game.tileSize * 1.35));
+    double y = (game.rnd.nextDouble() *
+            (game.screenSize.height - (game.tileSize * 2.85))) +
+        (game.tileSize * 1.5);
     targetLocation = Offset(x, y);
   }
 
   void render(Canvas c) {
     if (isDead) {
-      deadSprite.renderRect(c, flyRect.inflate(2));
+      deadSprite.renderRect(c, flyRect.inflate(flyRect.width / 2));
     } else {
-      flyingSprite[flyingSpriteIndex.toInt()].renderRect(c, flyRect.inflate(2));
+      flyingSprite[flyingSpriteIndex.toInt()]
+          .renderRect(c, flyRect.inflate(flyRect.width / 2));
       if (game.activeView == View.playing) callout.render(c);
     }
   }
@@ -51,7 +53,7 @@ class Fly {
       callout.update(t);
 
       flyingSpriteIndex += t * 30;
-      if (flyingSpriteIndex.toInt() >= 2) flyingSpriteIndex -= 2;
+      if (flyingSpriteIndex.toInt() >= 2) flyingSpriteIndex %= 2;
 
       double stepDistance = speed * t;
       Offset toTarget = targetLocation - Offset(flyRect.left, flyRect.top);

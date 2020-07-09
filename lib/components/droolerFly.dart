@@ -13,6 +13,6 @@ class DroolerFly extends Fly {
     flyingSprite.add(Sprite('flies/drooler-fly-2.png'));
     deadSprite = Sprite('flies/drooler-fly-dead.png');
 
-    flyRect = Rect.fromLTWH(x, y, 1.5 * game.tileSize, 1.5 * game.tileSize);
+    flyRect = Rect.fromLTWH(x, y, 1 * game.tileSize, 1 * game.tileSize);
   }
 }

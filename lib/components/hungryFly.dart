@@ -11,6 +11,6 @@ class HungryFly extends Fly {
     flyingSprite.add(Sprite('flies/hungry-fly-2.png'));
     deadSprite = Sprite('flies/hungry-fly-dead.png');
 
-    flyRect = Rect.fromLTWH(x, y, 1.65 * game.tileSize, 1.65 * game.tileSize);
+    flyRect = Rect.fromLTWH(x, y, 1.1 * game.tileSize, 1.1 * game.tileSize);
   }
 }

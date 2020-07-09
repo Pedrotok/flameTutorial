@@ -11,6 +11,6 @@ class HouseFly extends Fly {
     flyingSprite.add(Sprite('flies/house-fly-2.png'));
     deadSprite = Sprite('flies/house-fly-dead.png');
 
-    flyRect = Rect.fromLTWH(x, y, 1.5 * game.tileSize, 1.5 * game.tileSize);
+    flyRect = Rect.fromLTWH(x, y, 1 * game.tileSize, 1 * game.tileSize);
   }
 }

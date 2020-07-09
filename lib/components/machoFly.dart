@@ -13,6 +13,6 @@ class MachoFly extends Fly {
     flyingSprite.add(Sprite('flies/macho-fly-2.png'));
     deadSprite = Sprite('flies/macho-fly-dead.png');
 
-    flyRect = Rect.fromLTWH(x, y, 2.025 * game.tileSize, 2.025 * game.tileSize);
+    flyRect = Rect.fromLTWH(x, y, 1.35 * game.tileSize, 1.35 * game.tileSize);
   }
 }
