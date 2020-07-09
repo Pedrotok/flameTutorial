@@ -1,7 +1,10 @@
 import 'dart:ui';
 
+import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
+import 'package:langaw/components/callout.dart';
 import 'package:langaw/langawGame.dart';
+import 'package:langaw/view.dart';
 
 class Fly {
   Rect flyRect;
@@ -13,9 +16,11 @@ class Fly {
   double flyingSpriteIndex = 0;
   double get speed => game.tileSize * 3;
   Offset targetLocation;
+  Callout callout;
 
   Fly(this.game) {
     setTargetLocation();
+    callout = Callout(this);
   }
 
   void setTargetLocation() {
@@ -31,6 +36,7 @@ class Fly {
       deadSprite.renderRect(c, flyRect.inflate(2));
     } else {
       flyingSprite[flyingSpriteIndex.toInt()].renderRect(c, flyRect.inflate(2));
+      if (game.activeView == View.playing) callout.render(c);
     }
   }
 
@@ -42,6 +48,8 @@ class Fly {
         isOffScreen = true;
       }
     } else {
+      callout.update(t);
+
       flyingSpriteIndex += t * 30;
       if (flyingSpriteIndex.toInt() >= 2) flyingSpriteIndex -= 2;
 
@@ -59,7 +67,18 @@ class Fly {
   }
 
   void onTapDown() {
-    isDead = true;
-    game.spawnFly();
+    if (!isDead) {
+      if (game.soundButton.isEnabled)
+        Flame.audio
+            .play('sfx/ouch' + (game.rnd.nextInt(11) + 1).toString() + '.ogg');
+      isDead = true;
+      if (game.activeView == View.playing) {
+        game.score += 1;
+      }
+      if (game.score > (game.storage.getInt('highscore') ?? 0)) {
+        game.storage.setInt('highscore', game.score);
+        game.highscoreDisplay.updateHighscore();
+      }
+    }
   }
 }
