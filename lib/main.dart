@@ -2,6 +2,7 @@ import 'package:flame/flame.dart';
 import 'package:flame/util.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:langaw/BGM.dart';
 import 'package:langaw/langawGame.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -69,6 +70,7 @@ void main() async {
 
   LangawGame game = LangawGame(storage);
   runApp(game.widget);
+  BGM.attachWidgetBindingListener();
 
   var tapper = TapGestureRecognizer();
   tapper.onTapDown = game.onTapDown;

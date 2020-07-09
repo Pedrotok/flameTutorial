@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flame/flame.dart';
 import 'package:flame/game/game.dart';
 import 'package:flutter/gestures.dart';
+import 'package:langaw/BGM.dart';
 import 'package:langaw/components/credits.dart';
 import 'package:langaw/components/creditsView.dart';
 import 'package:langaw/components/fly.dart';
@@ -76,11 +77,8 @@ class LangawGame extends Game {
     soundButton = SoundButton(this);
     score = 0;
 
-    homeBGM = await Flame.audio.loopLongAudio('bgm/home.mp3', volume: .25);
-    homeBGM.pause();
-    playingBGM =
-        await Flame.audio.loopLongAudio('bgm/playing.mp3', volume: .25);
-    playingBGM.pause();
+    await BGM.add('bgm/home.mp3');
+    await BGM.add('bgm/playing.mp3');
 
     playHomeBGM();
   }
@@ -207,14 +205,10 @@ class LangawGame extends Game {
   }
 
   void playHomeBGM() {
-    playingBGM.pause();
-    playingBGM.seek(Duration.zero);
-    homeBGM.resume();
+    BGM.play(0);
   }
 
   void playPlayingBGM() {
-    homeBGM.pause();
-    homeBGM.seek(Duration.zero);
-    playingBGM.resume();
+    BGM.play(1);
   }
 }
